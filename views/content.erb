@@ -1,40 +1,53 @@
 <div class="brist">
+  <div class="column">
   <table>
-    <tr>
-      <td></td>
-      <td class="hand-n">
-        <span class="spade">&spades;</span> T </br>
-        <span class="heart">&hearts;</span> T9863 </br>
-        <span class="diamond">&diams;</span> AKT52 </br>
-        <span class="club">&clubs; </span> 2 </br>
-      </td>
-      <td></td>
-    </tr>
-    <tr>
-      <td class="hand-w">
-        <span class="spade">&spades;</span> KJ842 </br>
-        <span class="heart">&hearts;</span> QJ2 </br>
-        <span class="diamond">&diams;</span> 84 </br>
-        <span class="club">&clubs; </span> 874 </br>
-      </td>
-      <td>
-      </td>
-      <td class="hand-e">
-        <span class="spade">&spades;</span> Q9765 </br>
-        <span class="heart">&hearts;</span> 754 </br>
-        <span class="diamond">&diams;</span> </br>
-        <span class="club">&clubs; </span> AK1065 </br>
-      </td>
-    </tr>
-    <tr>
-      <td></td>
-      <td class="hand-s">
-        <span class="spade">&spades;</span> A3 </br>
-        <span class="heart">&hearts;</span> A </br>
-        <span class="diamond">&diams;</span> QJ9763</br>
-        <span class="club">&clubs; </span> QJ93 </br>
-      </td>
-      <td></td>
-    </tr>
+    <tbody>
+      <tr>
+        <td>
+        </td>
+        <td class="hand-n">
+          <%= erb :hand, locals: {hand: deal.n} %>
+        </td>
+        <td></td>
+      </tr>
+      <tr>
+        <td class="hand-w">
+          <%= erb :hand, locals: {hand: deal.w} %>
+        </td>
+        <td class="<%= ["directions", "vulnerable-#{vulnerable}", "dealer-#{dealer}"].join(' ') %>">
+          <span class="badge direction-N"> N </span></br>
+          <span class="badge direction-W"> W </span><span class="badge direction-E"> E </span> </br>
+          <span class="badge direction-S"> S </span>
+        </td>
+        <td class="hand-e">
+          <%= erb :hand, locals: {hand: deal.e} %>
+        </td>
+      </tr>
+      <tr>
+        <td></td>
+        <td class="hand-s">
+          <%= erb :hand, locals: {hand: deal.s} %>
+        </td>
+        <td></td>
+      </tr>
+    </tbody>
   </table>
+  </div>
+  <div class="auction">
+    <table>
+      <tr>
+        <th>W</th>
+        <th>N</th>
+        <th>E</th>
+        <th>S</th>
+      </tr>
+      <% (bids_offset(dealer) + auction.bids).each_slice(4).each do |slice| %>
+        <tr>
+          <% slice.each do |bid| %>
+            <td><%= bid %></td>
+          <% end %>
+        </tr>
+      <% end %>
+    </table>
+  </div>
 </div>
