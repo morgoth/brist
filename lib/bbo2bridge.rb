@@ -1,7 +1,7 @@
 require "uri"
 require "rack"
 require "bridge"
-require "bbo"
+require_relative "bbo"
 
 class Bbo2bridge
   def initialize(url)
@@ -14,6 +14,14 @@ class Bbo2bridge
 
   def auction
     @auction ||= Bridge::Auction.new(bbo.dealer, bbo.auction)
+  end
+
+  def dealer
+    bbo.dealer
+  end
+
+  def vulnerable
+    bbo.vulnerable
   end
 
   private

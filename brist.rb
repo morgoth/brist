@@ -1,5 +1,8 @@
 require "sinatra"
 require "bridge"
+require_relative "lib/bbo2bridge"
+
+ENV["BRIST_HOST"] ||= "http://localhost:9292"
 
 helpers do
   def inline(template, options)
@@ -21,6 +24,10 @@ helpers do
   end
 end
 
+get "/" do
+  erb :home
+end
+
 get "/brist/:id.js" do
   # TODO: handle missing params and invalid values
   deal = Bridge::Deal.from_id(params[:id].to_i)
@@ -31,7 +38,33 @@ get "/brist/:id.js" do
     dealer: params[:d].upcase,
     vulnerable: params[:v].upcase,
     auction: Bridge::Auction.new(params[:d].upcase, params[:a].split(",").map(&:upcase))
+  }, layout: false
+end
+
+get "/brist/:id" do
+  # TODO: handle duplication
+  deal = Bridge::Deal.from_id(params[:id].to_i)
+
+  erb :board, locals: {
+    deal: deal,
+    dealer: params[:d].upcase,
+    vulnerable: params[:v].upcase,
+    auction: Bridge::Auction.new(params[:d].upcase, params[:a].split(",").map(&:upcase))
   }
+end
+
+post "/convert" do
+  bbo2bridge = Bbo2bridge.new(params[:url])
+
+  query = {d: bbo2bridge.dealer, v: bbo2bridge.vulnerable, a: bbo2bridge.auction.bids.map(&:to_s).join(",")}.map do |k, v|
+    "#{k}=#{v}"
+  end.join("&")
+  redirect "/brist/#{bbo2bridge.deal.id}?#{query}"
+end
+
+get "/application.css" do
+  content_type "text/css"
+  sass :application
 end
 
 get "/brist.css" do

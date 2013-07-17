@@ -1,2 +1,2 @@
-document.write('<link href=\"http://brist.herokuapp.com/brist.css\" media=\"screen\" rel=\"stylesheet\" />');
-document.write("<%= inline :content, locals: locals %>");
+document.write('<link href=\"<%= ENV['BRIST_HOST'] %>/brist.css\" media=\"screen\" rel=\"stylesheet\" />');
+document.write("<%= inline :board, locals: locals %>");
