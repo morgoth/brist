@@ -2,8 +2,8 @@ require "sinatra"
 require "bridge"
 
 helpers do
-  def inline(name, options)
-    content = erb(name, options)
+  def inline(template, options)
+    content = erb(template, options)
     content.gsub("\n", '\n').gsub('"', '\"')
   end
 
@@ -15,9 +15,14 @@ helpers do
     when "S" then ["", "", ""]
     end
   end
+
+  def cards_in_suit(hand, suit)
+    hand.select { |card| card.suit == suit }.map(&:value).join
+  end
 end
 
 get "/brist/:id.js" do
+  # TODO: handle missing params and invalid values
   deal = Bridge::Deal.from_id(params[:id].to_i)
   erb :index, locals: {
     deal: deal,

@@ -1,4 +1,4 @@
-<span class="spade">&spades;</span> <%= hand.select { |card| card.suit == "S" }.map(&:value).join %> </br>
-<span class="heart">&hearts;</span> <%= hand.select { |card| card.suit == "H" }.map(&:value).join %> </br>
-<span class="diamond">&diams;</span> <%= hand.select { |card| card.suit == "D" }.map(&:value).join %> </br>
-<span class="club">&clubs; </span> <%= hand.select { |card| card.suit == "C" }.map(&:value).join %>
+<span class="spade">&spades;</span> <%= cards_in_suit(hand, "S") %> </br>
+<span class="heart">&hearts;</span> <%= cards_in_suit(hand, "H") %> </br>
+<span class="diamond">&diams;</span> <%= cards_in_suit(hand, "D") %> </br>
+<span class="club">&clubs; </span> <%= cards_in_suit(hand, "C") %>

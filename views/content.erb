@@ -1,6 +1,5 @@
 <div class="brist">
-  <div class="column">
-  <table>
+  <table class="cards">
     <tbody>
       <tr>
         <td>
@@ -32,22 +31,19 @@
       </tr>
     </tbody>
   </table>
-  </div>
-  <div class="auction">
-    <table>
+  <table class="auction">
+    <tr>
+      <th>W</th>
+      <th>N</th>
+      <th>E</th>
+      <th>S</th>
+    </tr>
+    <% (bids_offset(dealer) + auction.bids).each_slice(4).each do |slice| %>
       <tr>
-        <th>W</th>
-        <th>N</th>
-        <th>E</th>
-        <th>S</th>
+        <% slice.each do |bid| %>
+          <td><%= bid %></td>
+        <% end %>
       </tr>
-      <% (bids_offset(dealer) + auction.bids).each_slice(4).each do |slice| %>
-        <tr>
-          <% slice.each do |bid| %>
-            <td><%= bid %></td>
-          <% end %>
-        </tr>
-      <% end %>
-    </table>
-  </div>
+    <% end %>
+  </table>
 </div>
