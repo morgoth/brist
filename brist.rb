@@ -32,7 +32,6 @@ get "/brist/:id.js" do
     vulnerable: params[:v].upcase,
     auction: Bridge::Auction.new(params[:d].upcase, params[:a].split(",").map(&:upcase))
   }
-
 end
 
 get "/brist.css" do
