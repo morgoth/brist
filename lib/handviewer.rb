@@ -29,7 +29,6 @@ class Handviewer
 
   def vulnerable
     @vulnerable ||= case params["v"]
-    when "o" then "NONE"
     when "n" then "NS"
     when "e" then "EW"
     when "b" then "BOTH"

@@ -1,6 +1,7 @@
 require "sinatra"
 require "bridge"
 require_relative "lib/bbo2bridge"
+require_relative "lib/brist"
 
 ENV["BRIST_HOST"] ||= "http://localhost:9292"
 
@@ -29,37 +30,41 @@ get "/" do
 end
 
 get "/brist/:id.js" do
-  # TODO: handle missing params and invalid values
-  deal = Bridge::Deal.from_id(params[:id].to_i)
+  brist = Brist.new(params)
 
   content_type "text/javascript", charset: "UTF-8"
-  erb :embedable, locals: {
-    deal: deal,
-    dealer: params[:d].upcase,
-    vulnerable: params[:v].upcase,
-    auction: Bridge::Auction.new(params[:d].upcase, params[:a].split(",").map(&:upcase))
-  }, layout: false
+  if brist.valid?
+    erb :embedable, locals: {
+      deal:       brist.deal,
+      dealer:     brist.dealer,
+      vulnerable: brist.vulnerable,
+      auction:    brist.auction
+    }, layout: false
+  else
+    # TODO: improve
+    "document.write('Something went wrong');"
+  end
 end
 
 get "/brist/:id" do
-  # TODO: handle duplication
-  deal = Bridge::Deal.from_id(params[:id].to_i)
+  brist = Brist.new(params)
 
-  locals = {
-    deal: deal,
-    dealer: params[:d].upcase,
-    vulnerable: params[:v].upcase,
-    auction: Bridge::Auction.new(params[:d].upcase, params[:a].split(",").map(&:upcase)),
-  }
-
-  locals[:query] = {d: locals[:dealer], v: locals[:vulnerable], a: locals[:auction].bids.map(&:to_s).join(",")}.map do |k, v|
-    "#{k}=#{v}"
-  end.join("&")
-
-  erb :brist, locals: locals
+  if brist.valid?
+    erb :brist, locals: {
+      deal:       brist.deal,
+      dealer:     brist.dealer,
+      vulnerable: brist.vulnerable,
+      auction:    brist.auction,
+      query:      brist.query
+    }
+  else
+    # TODO: improve
+    "Something went wrong"
+  end
 end
 
 post "/convert" do
+  # TODO: add validation
   bbo2bridge = Bbo2bridge.new(params[:url])
 
   query = {d: bbo2bridge.dealer, v: bbo2bridge.vulnerable, a: bbo2bridge.auction.bids.map(&:to_s).join(",")}.map do |k, v|
