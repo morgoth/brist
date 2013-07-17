@@ -1,4 +1,6 @@
-class BBO
+# http://www.bridgebase.com/help/v2help/handviewer.html
+
+class Handviewer
   attr_reader :params
 
   def initialize(params)
@@ -31,18 +33,24 @@ class BBO
     when "n" then "NS"
     when "e" then "EW"
     when "b" then "BOTH"
+    else
+      "NONE"
     end
   end
 
   def auction
-    @auction ||= (params["a"].split(/(\d\w)|(\w)/) - [""]).map! do |bid|
-      case bid.upcase
-      when "P" then "PASS"
-      when "D" then "X"
-      when "R" then "XX"
-      when /\dN/ then bid[0] + "NT"
-      else
-        bid.upcase
+    @auction ||= begin
+      # Removes "!(some alert)" and "{some annotation}"
+      bids = params["a"].gsub(/!\([\w|\s]*\)/, "").gsub(/{[\w|\s]*}/, "")
+      (bids.split(/(\d\w)|(\w)/) - [""]).map! do |bid|
+        case bid.upcase
+        when "P" then "PASS"
+        when "D" then "X"
+        when "R" then "XX"
+        when /\dN/ then bid[0] + "NT"
+        else
+          bid.upcase
+        end
       end
     end
   end
@@ -56,9 +64,3 @@ class BBO
      hand.match(/C(.*?)$/)[1].split("").map { |value| "C" << value.upcase }).flatten
   end
 end
-
-# Rack::Utils.parse_query URI.parse(c).query
-
-# {"sn"=>"fkzyw2", "s"=>"ST73HAKQTDQCJT764", "wn"=>"morgoth85", "w"=>"SAQ642H5DAT9863CA",
-# "nn"=>"ju28", "n"=>"S8H98632DJ4CQ9852", "en"=>"253", "e"=>"SKJ95HJ74DK752CK3", "d"=>"n", "v"=>"o", "b"=>"1",
-# "a"=>"PP2C2S3C3S4C4S5CPPP", "p"=>"SAS8S5S3DAD4D2DQD6DJDKC6CJCAC2C3S2C9S9S7CQCKC4D8H7HKH5H2", "c"=>"9"}

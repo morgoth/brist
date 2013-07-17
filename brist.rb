@@ -70,10 +70,10 @@ end
 
 get "/application.css" do
   content_type "text/css"
-  sass :application
+  sass :"stylesheets/application"
 end
 
 get "/brist.css" do
   content_type "text/css"
-  sass :brist
+  sass :"stylesheets/brist"
 end
