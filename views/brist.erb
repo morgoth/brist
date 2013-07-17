@@ -1,0 +1,6 @@
+<%= erb :board, locals: locals %>
+
+<div>
+Embed on your website:
+<input type="text" readonly="" spellcheck="false" name="embed-field" value="&lt;script src=&quot;<%= ENV['BRIST_HOST'] %>/brist/<%= deal.id %>.js?<%= query %>&quot;&gt;&lt;/script&gt;">
+</div>
