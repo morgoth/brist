@@ -2,6 +2,7 @@ require "uri"
 require "rack"
 require "bridge"
 require_relative "handviewer"
+require_relative "lin"
 
 class Bbo2bridge
   def initialize(url)
@@ -29,8 +30,7 @@ class Bbo2bridge
 
   def client
     @client ||= if query.has_key?("lin")
-      # Lin.new(query["lin"])
-      raise StandardError("not implemented yet")
+      Lin.new(query["lin"])
     else
       Handviewer.new(query)
     end
