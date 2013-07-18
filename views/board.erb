@@ -33,15 +33,15 @@
   </table>
   <table class="auction">
     <tr>
-      <th>W</th>
-      <th>N</th>
-      <th>E</th>
-      <th>S</th>
+      <th class="<%= vulnerable?(vulnerable, 'W') ? 'vulnerable' : 'non-vulnerable' %>">W</th>
+      <th class="<%= vulnerable?(vulnerable, 'N') ? 'vulnerable' : 'non-vulnerable' %>">N</th>
+      <th class="<%= vulnerable?(vulnerable, 'E') ? 'vulnerable' : 'non-vulnerable' %>">E</th>
+      <th class="<%= vulnerable?(vulnerable, 'S') ? 'vulnerable' : 'non-vulnerable' %>">S</th>
     </tr>
     <% (bids_offset(dealer) + auction.bids).each_slice(4).each do |slice| %>
       <tr>
         <% slice.each do |bid| %>
-          <td><%= bid %></td>
+          <td><%= bid_tag(bid) if bid != "" %></td>
         <% end %>
       </tr>
     <% end %>

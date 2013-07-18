@@ -80,10 +80,10 @@ class Lin
   end
 
   def parse_hand(hand)
-     (hand.match(/S(.*?)H/)[1].split("").map { |value| "S" << value.upcase } <<
-     hand.match(/H(.*?)D/)[1].split("").map { |value| "H" << value.upcase } <<
-     hand.match(/D(.*?)C/)[1].split("").map { |value| "D" << value.upcase } <<
-     hand.match(/C(.*?)$/)[1].split("").map { |value| "C" << value.upcase }).flatten
+    (hand.match(/S(.*?)H/)[1].split("").map { |value| "S" << value.upcase } <<
+    hand.match(/H(.*?)D/)[1].split("").map { |value| "H" << value.upcase } <<
+    hand.match(/D(.*?)C/)[1].split("").map { |value| "D" << value.upcase } <<
+    hand.match(/C(.*?)$/)[1].split("").map { |value| "C" << value.upcase }).flatten
   end
 
   def deck

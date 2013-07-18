@@ -23,6 +23,35 @@ helpers do
   def cards_in_suit(hand, suit)
     hand.select { |card| card.suit == suit }.map(&:value).join
   end
+
+  def vulnerable?(vulnerable, hand)
+    case vulnerable
+    when "BOTH" then true
+    when "NONE" then false
+    when "NS", "EW" then vulnerable.include?(hand)
+    end
+  end
+
+  def bid_tag(bid)
+    case
+    when bid.pass?   then "Pass"
+    when bid.contract?
+      "#{bid.level}<span class='suit-#{bid.suit}'>#{suit_symbol(bid.suit)}</span>"
+    when bid.double? then "Dbl"
+    when bid.double? then "Redbl"
+    end
+  end
+
+  def suit_symbol(suit)
+    case suit
+    when "C" then "&clubs;"
+    when "D" then "&diams;"
+    when "H" then "&hearts;"
+    when "S" then "&spades;"
+    else
+      suit
+    end
+  end
 end
 
 get "/" do
