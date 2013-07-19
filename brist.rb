@@ -3,6 +3,8 @@ require "bridge"
 require_relative "lib/bbo2bridge"
 require_relative "lib/brist"
 
+set :erb, trim: "-"
+
 ENV["BRIST_HOST"] ||= "http://localhost:9292"
 
 helpers do
@@ -38,7 +40,7 @@ helpers do
     when bid.contract?
       "#{bid.level}<span class='suit-#{bid.suit}'>#{suit_symbol(bid.suit)}</span>"
     when bid.double? then "Dbl"
-    when bid.redouble? then "Redbl"
+    when bid.redouble? then "Rdbl"
     end
   end
 

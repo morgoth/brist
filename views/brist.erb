@@ -4,3 +4,23 @@
 Embed on your website:
 <input id="embedable-board" type="text" readonly="" spellcheck="false" name="embed-field" value="&lt;script src=&quot;<%= ENV['BRIST_HOST'] %>/brist/<%= deal.id %>.js?<%= query %>&quot;&gt;&lt;/script&gt;">
 </div>
+<!--
+or <a id="paste-source" href="#">paste to your website source <i class="icon-chevron-down"></i></a>
+<div id="pastable-source">
+
+ <pre>
+<code>
+&lt;&#33;-- Board HTML --&gt;
+<%= ERB::Util.html_escape(erb :board, locals: locals) -%>
+</code>
+</pre>
+
+<pre>
+<code>
+/* brist.css */
+<%= ERB::Util.html_escape(sass :"stylesheets/brist") -%>
+</code>
+</pre>
+
+</div>
+ -->

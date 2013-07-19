@@ -5,13 +5,13 @@
         <td>
         </td>
         <td class="hand-n">
-          <%= erb :hand, locals: {hand: deal.n} %>
+        <%= erb :hand, locals: {hand: deal.n} -%>
         </td>
         <td></td>
       </tr>
       <tr>
         <td class="hand-w">
-          <%= erb :hand, locals: {hand: deal.w} %>
+        <%= erb :hand, locals: {hand: deal.w} -%>
         </td>
         <td class="<%= ["directions", "vulnerable-#{vulnerable}", "dealer-#{dealer}"].join(' ') %>">
           <span class="badge direction-N"> N </span></br>
@@ -19,13 +19,13 @@
           <span class="badge direction-S"> S </span>
         </td>
         <td class="hand-e">
-          <%= erb :hand, locals: {hand: deal.e} %>
+        <%= erb :hand, locals: {hand: deal.e} -%>
         </td>
       </tr>
       <tr>
         <td></td>
         <td class="hand-s">
-          <%= erb :hand, locals: {hand: deal.s} %>
+        <%= erb :hand, locals: {hand: deal.s} -%>
         </td>
         <td></td>
       </tr>
@@ -38,12 +38,12 @@
       <th class="<%= vulnerable?(vulnerable, 'E') ? 'vulnerable' : 'non-vulnerable' %>">E</th>
       <th class="<%= vulnerable?(vulnerable, 'S') ? 'vulnerable' : 'non-vulnerable' %>">S</th>
     </tr>
-    <% (bids_offset(dealer) + auction.bids).each_slice(4).each do |slice| %>
-      <tr>
-        <% slice.each do |bid| %>
-          <td><%= bid_tag(bid) if bid != "" %></td>
-        <% end %>
-      </tr>
-    <% end %>
+    <% (bids_offset(dealer) + auction.bids).each_slice(4).each do |slice| -%>
+    <tr>
+      <% slice.each do |bid| -%>
+      <td><%= bid_tag(bid) if bid != "" -%></td>
+      <% end -%>
+    </tr>
+    <% end -%>
   </table>
 </div>
