@@ -16,4 +16,9 @@ describe Handviewer do
     handviewer = Handviewer.new("a" => "2DDRPP3NPPP")
     assert_equal ["2D", "X", "XX", "PASS", "PASS", "3NT", "PASS", "PASS", "PASS"], handviewer.auction
   end
+
+  it "parses auction with alerts" do
+    handviewer = Handviewer.new("a" => "1C()P1HDR!1SPP1NPP2SPPP")
+    assert_equal ["1C", "PASS", "1H", "X", "XX", "1S", "PASS", "PASS", "1NT", "PASS", "PASS", "2S", "PASS", "PASS", "PASS"], handviewer.auction
+  end
 end

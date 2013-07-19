@@ -38,7 +38,7 @@ helpers do
     when bid.contract?
       "#{bid.level}<span class='suit-#{bid.suit}'>#{suit_symbol(bid.suit)}</span>"
     when bid.double? then "Dbl"
-    when bid.double? then "Redbl"
+    when bid.redouble? then "Redbl"
     end
   end
 

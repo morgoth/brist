@@ -40,7 +40,7 @@ class Handviewer
   def auction
     @auction ||= begin
       # Removes "!(some alert)" and "{some annotation}"
-      bids = params["a"].gsub(/!\([\w|\s]*\)/, "").gsub(/{[\w|\s]*}/, "")
+      bids = params["a"].gsub("!", "").gsub(/\([\w|\s]*\)/, "").gsub(/{[\w|\s]*}/, "")
       (bids.split(/(\d\w)|(\w)/) - [""]).map! do |bid|
         case bid.upcase
         when "P" then "PASS"
