@@ -1,12 +1,16 @@
+<% if defined?(alert) %>
+<div class="alert">
+  <%= alert %>
+</div>
+<% end %>
+
 <form action="/convert", method="post">
   <fieldset>
-    <legend>Convert BBO url</legend>
-    <textarea name="url" required="required" autofocus="autofocus" rows="5" cols="50" placeholder="You can find it on your BBO boards history as handwiever tool"></textarea>
+    <legend>Convert BBO link</legend>
+    <textarea name="url" required="required" autofocus="autofocus" rows="5" cols="50" placeholder="You can find it on your BBO boards history as handwiever export tool"></textarea>
     <span class="help-block">Find help on <a href="http://www.bridgebase.com/help/v2help/hand_records.html">BBO</a></span>
     <button type="submit" class="btn">Convert</button>
     or see
     <a href="/brist/17055613973184603211770452561?d=N&v=NONE&a=PASS,1C,PASS,2H,PASS,3C,PASS,3H,PASS,3S,PASS,4C,PASS,4D,PASS,4H,PASS,4S,PASS,4NT,PASS,5D,X,6H,PASS,PASS,PASS">example</a>
   </fieldset>
 </form>
-
-

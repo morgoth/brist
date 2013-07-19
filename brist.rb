@@ -93,13 +93,17 @@ get "/brist/:id" do
 end
 
 post "/convert" do
-  # TODO: add validation
-  bbo2bridge = Bbo2bridge.new(params[:url])
+  begin
+    bbo2bridge = Bbo2bridge.new(params[:url])
 
-  query = {d: bbo2bridge.dealer, v: bbo2bridge.vulnerable, a: bbo2bridge.auction.bids.map(&:to_s).join(",")}.map do |k, v|
-    "#{k}=#{v}"
-  end.join("&")
-  redirect "/brist/#{bbo2bridge.deal.id}?#{query}"
+    query = {d: bbo2bridge.dealer, v: bbo2bridge.vulnerable, a: bbo2bridge.auction.bids.map(&:to_s).join(",")}.map do |k, v|
+      "#{k}=#{v}"
+    end.join("&")
+
+    redirect "/brist/#{bbo2bridge.deal.id}?#{query}"
+  rescue
+    erb :home, locals: {alert: "Pasted URL is wrong"}
+  end
 end
 
 get "/application.css" do
