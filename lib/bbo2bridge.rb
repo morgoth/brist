@@ -1,8 +1,8 @@
 require "uri"
 require "rack"
 require "bridge"
+require "lin"
 require_relative "handviewer"
-require_relative "lin"
 
 class Bbo2bridge
   def initialize(url)
@@ -15,7 +15,7 @@ class Bbo2bridge
   end
 
   def auction
-    @auction ||= Bridge::Auction.new(client.dealer, client.auction)
+    @auction ||= Bridge::Auction.new(client.dealer, client.bids)
   end
 
   def dealer
@@ -30,7 +30,7 @@ class Bbo2bridge
 
   def client
     @client ||= if query.has_key?("lin")
-      Lin.new(query["lin"])
+      Lin::Parser.new(query["lin"])
     else
       Handviewer.new(query)
     end

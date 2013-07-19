@@ -12,13 +12,13 @@ describe Handviewer do
     assert_equal ["S8", "H9", "H8", "H6", "H3", "H2", "DQ", "DJ", "D9", "D8", "D5", "D4", "D2"], handviewer.e
   end
 
-  it "parses auction" do
+  it "parses bids" do
     handviewer = Handviewer.new("a" => "2DDRPP3NPPP")
-    assert_equal ["2D", "X", "XX", "PASS", "PASS", "3NT", "PASS", "PASS", "PASS"], handviewer.auction
+    assert_equal ["2D", "X", "XX", "PASS", "PASS", "3NT", "PASS", "PASS", "PASS"], handviewer.bids
   end
 
-  it "parses auction with alerts" do
+  it "parses bids with alerts" do
     handviewer = Handviewer.new("a" => "1C()P1HDR!1SPP1NPP2SPPP")
-    assert_equal ["1C", "PASS", "1H", "X", "XX", "1S", "PASS", "PASS", "1NT", "PASS", "PASS", "2S", "PASS", "PASS", "PASS"], handviewer.auction
+    assert_equal ["1C", "PASS", "1H", "X", "XX", "1S", "PASS", "PASS", "1NT", "PASS", "PASS", "2S", "PASS", "PASS", "PASS"], handviewer.bids
   end
 end

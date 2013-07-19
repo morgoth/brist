@@ -37,8 +37,8 @@ class Handviewer
     end
   end
 
-  def auction
-    @auction ||= begin
+  def bids
+    @bids ||= begin
       # Removes "!(some alert)" and "{some annotation}"
       bids = params["a"].gsub("!", "").gsub(/\([\w|\s]*\)/, "").gsub(/{[\w|\s]*}/, "")
       (bids.split(/(\d\w)|(\w)/) - [""]).map! do |bid|
