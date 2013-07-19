@@ -98,13 +98,11 @@ post "/convert" do
   begin
     bbo2bridge = Bbo2bridge.new(params[:url])
 
-    query = {d: bbo2bridge.dealer, v: bbo2bridge.vulnerable, a: bbo2bridge.auction.bids.map(&:to_s).join(",")}.map do |k, v|
-      "#{k}=#{v}"
-    end.join("&")
+    query = Rack::Utils.build_query({d: bbo2bridge.dealer, v: bbo2bridge.vulnerable, a: bbo2bridge.auction.bids.map(&:to_s).join(",")})
 
     redirect "/brist/#{bbo2bridge.deal.id}?#{query}"
   rescue
-    erb :home, locals: {alert: "Pasted URL is wrong"}
+    erb :home, locals: {alert: "There was a problem with parsing given link"}
   end
 end
 
