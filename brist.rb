@@ -68,8 +68,8 @@ get "/" do
   erb :home
 end
 
-get "/brist/:id.js" do
-  brist = Brist.new(params)
+get %r{^/([\d]+).js$} do |id|
+  brist = Brist.new(id, params)
 
   content_type "text/javascript", charset: "UTF-8"
   if brist.valid?
@@ -85,8 +85,8 @@ get "/brist/:id.js" do
   end
 end
 
-get "/brist/:id" do
-  brist = Brist.new(params)
+get %r{^/([\d]+)$} do |id|
+  brist = Brist.new(id, params)
 
   if brist.valid?
     erb :brist, locals: {

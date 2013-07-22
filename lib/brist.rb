@@ -1,12 +1,13 @@
 class Brist
-  attr_reader :attributes
+  attr_reader :id, :attributes
 
-  def initialize(attributes)
+  def initialize(id, attributes)
+    @id         = id
     @attributes = attributes
   end
 
   def deal
-    @deal ||= Bridge::Deal.from_id(attributes[:id].to_i)
+    @deal ||= Bridge::Deal.from_id(id.to_i)
   rescue ArgumentError
   end
 
