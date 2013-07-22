@@ -108,7 +108,7 @@ post "/convert" do
 
     query = Rack::Utils.build_query({d: bbo2bridge.dealer, v: bbo2bridge.vulnerable, a: bbo2bridge.auction.bids.map(&:to_s).join("-")})
 
-    redirect "/brist/#{bbo2bridge.deal.id}?#{query}"
+    redirect "#{bbo2bridge.deal.id}?#{query}"
   rescue
     erb :home, locals: {alert: "There was a problem with parsing given link"}
   end
