@@ -29,10 +29,9 @@
   .directions
     text-align: center
 
-  .badge
-    line-height: 14px
+  .seat-direction
+    background-color: #999
     font-weight: bold
-    padding: 2px 7px
     -webkit-border-radius: 9px
     -moz-border-radius: 9px
     border-radius: 9px
@@ -40,37 +39,16 @@
     display: inline-block
     text-align: center
 
-  .vulnerable-BOTH
-    .direction-N, .direction-E, .direction-S, .direction-W
-      background-color: #b94a48
+  .seat
+    font-weight: bold
 
-  .vulnerable-EW
-    .direction-E, .direction-W
+    .vulnerable
       background-color: #b94a48
-    .direction-N, .direction-S
+    .non-vulnerable
       background-color: #468847
 
-  .vulnerable-NS
-    .direction-E, .direction-W
-      background-color: #468847
-    .direction-N, .direction-S
-      background-color: #b94a48
-
-  .vulnerable-NONE
-    .direction-N, .direction-E, .direction-S, .direction-W
-      background-color: #468847
-
-  .dealer-N .direction-N
-    background-color: #f89406 !important
-
-  .dealer-E .direction-E
-    background-color: #f89406 !important
-
-  .dealer-S .direction-S
-    background-color: #f89406 !important
-
-  .dealer-W .direction-W
-    background-color: #f89406 !important
+  .spacing
+    padding: 0px 5px
 
   .vulnerable
     background-color: #f2dede

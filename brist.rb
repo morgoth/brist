@@ -54,6 +54,14 @@ helpers do
       suit
     end
   end
+
+  def seat_class(dealer, vulnerable, direction)
+    if dealer == direction
+      "dealer"
+    else
+      vulnerable?(vulnerable, direction) ? "vulnerable" : "non-vulnerable"
+    end
+  end
 end
 
 get "/" do
@@ -98,7 +106,7 @@ post "/convert" do
   begin
     bbo2bridge = Bbo2bridge.new(params[:url])
 
-    query = Rack::Utils.build_query({d: bbo2bridge.dealer, v: bbo2bridge.vulnerable, a: bbo2bridge.auction.bids.map(&:to_s).join(",")})
+    query = Rack::Utils.build_query({d: bbo2bridge.dealer, v: bbo2bridge.vulnerable, a: bbo2bridge.auction.bids.map(&:to_s).join("-")})
 
     redirect "/brist/#{bbo2bridge.deal.id}?#{query}"
   rescue

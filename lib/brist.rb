@@ -28,14 +28,12 @@ class Brist
   end
 
   def query
-    @query ||= {d: dealer, v: vulnerable, a: auction.bids.map(&:to_s).join(",")}.map do |k, v|
-      "#{k}=#{v}"
-    end.join("&")
+    Rack::Utils.build_query({d: dealer, v: vulnerable, a: auction.bids.map(&:to_s).join("-")})
   end
 
   private
 
   def bids
-    @bids ||= attributes[:a] && attributes[:a].split(",").map(&:upcase)
+    @bids ||= (attributes[:a] && attributes[:a].split("-").map(&:upcase)) || []
   end
 end

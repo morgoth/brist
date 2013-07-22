@@ -5,27 +5,23 @@
         <td>
         </td>
         <td class="hand-n">
-        <%= erb :hand, locals: {hand: deal.n} -%>
+        <%= erb :hand, locals: {hand: deal.n, direction_class: seat_class(dealer, vulnerable, "N"), abbr: dealer == "N" ? "D" : "N", name: "North"} -%>
         </td>
         <td></td>
       </tr>
       <tr>
         <td class="hand-w">
-        <%= erb :hand, locals: {hand: deal.w} -%>
+        <%= erb :hand, locals: {hand: deal.w, direction_class: seat_class(dealer, vulnerable, "W"), abbr: dealer == "W" ? "D" : "W", name: "West"} -%>
         </td>
-        <td class="<%= ["directions", "vulnerable-#{vulnerable}", "dealer-#{dealer}"].join(' ') %>">
-          <span class="badge direction-N"> N </span></br>
-          <span class="badge direction-W"> W </span><span class="badge direction-E"> E </span> </br>
-          <span class="badge direction-S"> S </span>
-        </td>
+        <td></td>
         <td class="hand-e">
-        <%= erb :hand, locals: {hand: deal.e} -%>
+        <%= erb :hand, locals: {hand: deal.e, direction_class: seat_class(dealer, vulnerable, "E"), abbr: dealer == "E" ? "D" : "E", name: "East"} -%>
         </td>
       </tr>
       <tr>
         <td></td>
         <td class="hand-s">
-        <%= erb :hand, locals: {hand: deal.s} -%>
+        <%= erb :hand, locals: {hand: deal.s, direction_class: seat_class(dealer, vulnerable, "S"), abbr: dealer == "S" ? "D" : "S", name: "South"} -%>
         </td>
         <td></td>
       </tr>

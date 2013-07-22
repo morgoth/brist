@@ -1,4 +1,5 @@
-<span class="suit-S">&spades;</span> <%= cards_in_suit(hand, "S") %> </br>
-<span class="suit-H">&hearts;</span> <%= cards_in_suit(hand, "H") %> </br>
-<span class="suit-D">&diams;</span> <%= cards_in_suit(hand, "D") %> </br>
-<span class="suit-C">&clubs;</span> <%= cards_in_suit(hand, "C") %>
+<div class="seat"><span class="spacing seat-direction <%= direction_class %>"><%= abbr %></span> <%= name %></div>
+<div><span class="suit-S spacing">&spades;</span> <%= cards_in_suit(hand, "S") %></div>
+<div><span class="suit-H spacing">&hearts;</span> <%= cards_in_suit(hand, "H") %></div>
+<div><span class="suit-D spacing">&diams;</span> <%= cards_in_suit(hand, "D") %></div>
+<div><span class="suit-C spacing">&clubs;</span> <%= cards_in_suit(hand, "C") %></div>
