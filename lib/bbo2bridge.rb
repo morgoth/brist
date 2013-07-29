@@ -3,11 +3,7 @@ require "bridge"
 require "lin"
 require_relative "handviewer"
 
-class Bbo2bridge
-  def initialize(url)
-    @bbo_url = url
-  end
-
+class Bbo2bridge < Struct.new(:bbo_url)
   def deal
     @deal ||= Bridge::Deal.new(hands)
   end
@@ -35,7 +31,7 @@ class Bbo2bridge
   end
 
   def query
-    @query ||= Addressable::URI.parse(@bbo_url).query_values
+    @query ||= Addressable::URI.parse(bbo_url).query_values
   end
 
   def hands

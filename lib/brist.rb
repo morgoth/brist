@@ -1,11 +1,4 @@
-class Brist
-  attr_reader :id, :attributes
-
-  def initialize(id, attributes)
-    @id         = id
-    @attributes = attributes
-  end
-
+class Brist < Struct.new(:id, :attributes)
   def deal
     @deal ||= Bridge::Deal.from_id(id.to_i)
   rescue ArgumentError

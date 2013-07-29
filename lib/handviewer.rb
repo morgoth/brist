@@ -1,12 +1,6 @@
 # http://www.bridgebase.com/help/v2help/handviewer.html
 
-class Handviewer
-  attr_reader :params
-
-  def initialize(params)
-    @params = params
-  end
-
+class Handviewer < Struct.new(:params)
   def n
     @n ||= parse_hand(params["n"])
   end
