@@ -1,13 +1,11 @@
-require "uri"
-require "rack"
+require "addressable/uri"
 require "bridge"
 require "lin"
 require_relative "handviewer"
 
 class Bbo2bridge
   def initialize(url)
-    # FIXME: investigate {} signs in url
-    @bbo_url = URI.encode(URI.decode(url))
+    @bbo_url = url
   end
 
   def deal
@@ -37,7 +35,7 @@ class Bbo2bridge
   end
 
   def query
-    @query ||= Rack::Utils.parse_query(URI.parse(@bbo_url).query)
+    @query ||= Addressable::URI.parse(@bbo_url).query_values
   end
 
   def hands

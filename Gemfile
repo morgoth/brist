@@ -7,6 +7,7 @@ gem "bridge"
 gem "lin"
 gem "sass"
 gem "thin"
+gem "addressable"
 
 group :test do
   gem "rake"
