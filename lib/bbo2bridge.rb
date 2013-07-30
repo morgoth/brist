@@ -1,9 +1,10 @@
 require "addressable/uri"
+require "net/http"
 require "bridge"
 require "lin"
 require_relative "handviewer"
 
-class Bbo2bridge < Struct.new(:bbo_url)
+class Bbo2bridge < Struct.new(:url)
   def deal
     @deal ||= Bridge::Deal.new(hands)
   end
@@ -31,7 +32,21 @@ class Bbo2bridge < Struct.new(:bbo_url)
   end
 
   def query
-    @query ||= Addressable::URI.parse(bbo_url).query_values
+    @query ||= bbo_uri.query_values
+  end
+
+  def uri
+    @uri ||= Addressable::URI.parse(url)
+  end
+
+  def bbo_uri
+    uri.host == "tinyurl.com" ? get_tiny_uri : uri
+  end
+
+  def get_tiny_uri
+    net = Net::HTTP.new(uri.host, uri.port)
+    head = net.start { |http| http.head(uri.path) }
+    Addressable::URI.parse(head["location"])
   end
 
   def hands
